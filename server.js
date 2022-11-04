@@ -3,13 +3,42 @@ const path = require('path')
 const app = express()
 const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
+require('.dotenv').config()
 
 app.use(express.json())
+
+// post rollbar.com here
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+    accessToken: process.env.ROLLBAR_TOKEN,
+    captureUncaught: true,
+    captureUnhandledRejections
+})
+
+
+
+// call the html from public folder
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'))
+})
+
+// call the js from public folder
+app.get('/js', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.js'))
+})
+
+// call the styles from public folder
+app.get('/styles', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.css'))
+})
+
+
 
 app.get('/api/robots', (req, res) => {
     try {
         res.status(200).send(botsArr)
     } catch (error) {
+        rollbar.error('all bots could not be found')
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
     }
@@ -22,6 +51,7 @@ app.get('/api/robots/five', (req, res) => {
         let compDuo = shuffled.slice(6, 8)
         res.status(200).send({choices, compDuo})
     } catch (error) {
+        rollbar.critical('no bot choices loaded, broken app')
         console.log('ERROR GETTING FIVE BOTS', error)
         res.sendStatus(400)
     }
@@ -53,6 +83,7 @@ app.post('/api/duel', (req, res) => {
             res.status(200).send('You won!')
         }
     } catch (error) {
+        rollbar.error('critical')
         console.log('ERROR DUELING', error)
         res.sendStatus(400)
     }

@@ -1,0 +1,18 @@
+test 1
+
+test will make sure robots show up when 'draw' is clicked
+
+steps:
+
+go to website
+click 'draw'
+
+Test Postconditions:
+
+make sure that at least 2 robots appear
+
+
+
+
+assigned to:
+Jonas

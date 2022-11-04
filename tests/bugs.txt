@@ -1,0 +1,22 @@
+ID# 666
+
+Date
+
+See all bots button doesnt works
+    steps to reproduce
+
+    1.
+    2.
+
+expected results
+    all bots should appear
+    no errors logged in browser
+
+actual results
+    clicking see all bots does nothing
+    errors are produced
+
+environment
+    chrome 107.0.5304.87 x86_64
+    windows 10 pro
+

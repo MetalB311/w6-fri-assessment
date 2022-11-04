@@ -1,0 +1,17 @@
+functionality
+- make sure the battle works
+- 
+
+
+
+
+issues
+- even when you win, it marks it as a loss
+- 
+
+
+test criteria:
+
+entry criteria:
+
+exit criteria:
